@@ -1,8 +1,10 @@
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { getTransactions } from "../lib/league/get-transactions";
 import { TransactionRow } from "../lib/types";
 import DefaultThemeSetter from "./../../components/global-components/default-theme-setter";
 import TransactionTable from "./../../components/recent-transactions/transaction-table";
 import { Metadata } from "next";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
   title: "Recent Transactions",
@@ -30,13 +32,27 @@ export default async function Page() {
   return (
     <>
       <DefaultThemeSetter />
-      <div className="mx-auto w-full">
-        <div className="flex items-center">
-          <h1 className="text-2xl font-bold">Recent Transactions</h1>
-        </div>
 
-        <TransactionTable transactions={transactions} />
-      </div>
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Recent Transactions</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+
+      <Card className="mt-4">
+        <CardHeader>
+          <h1 className="text-left text-3xl font-bold">Recent Transactions</h1>
+        </CardHeader>
+        <CardContent>
+          <TransactionTable transactions={transactions} />
+        </CardContent>
+      </Card>
     </>
   );
 }

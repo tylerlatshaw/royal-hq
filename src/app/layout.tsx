@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="h-screen w-screen overflow-hidden bg-white text-black dark:bg-black dark:text-white">
+      <body className="h-screen w-screen overflow-hidden">
         {children}
       </body>
     </html>

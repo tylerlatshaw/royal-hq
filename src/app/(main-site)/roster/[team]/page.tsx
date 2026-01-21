@@ -1,10 +1,13 @@
 import RosterTable from "@/components/roster/roster-container";
 import TeamColorSetter from "@/components/roster/team-color-setter";
 import ViewMoreButton from "@/components/roster/view-more-button";
-import { resolveTeamColor } from "@/app/lib/team-color-map";
+import { resolveTeamColor } from "@/app/lib/team-map";
 import type { Team } from "@/app/lib/types";
 import { getTeamData } from "@/app/lib/league/get-team-data";
 import type { Metadata } from "next";
+import DefaultThemeSetter from "@/components/global-components/default-theme-setter";
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 
 export async function generateMetadata(
   { params }: Props
@@ -70,21 +73,42 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
+      <DefaultThemeSetter />
+
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/teams">ECHL Teams</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{teamData.name}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+
+      <Card className="mt-4">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <h1 className="text-2xl font-bold">{teamData.name + " Roster"}</h1>
+            <ViewMoreButton />
+          </div>
+        </CardHeader>
+        <CardContent>
+          <RosterTable teamData={teamData} teamColor={teamColor} />
+        </CardContent>
+      </Card>
+
       <TeamColorSetter
         color={teamColor}
         logo={teamData.logo?.large || "/reading-royals-logo.svg"}
         name={teamData.name}
         url={teamData.links?.officialWebUrl || "https://royalshockey.com"}
       />
-
-      <div className="mx-auto w-full">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold">{teamData.name}</h1>
-          <ViewMoreButton />
-        </div>
-
-        <RosterTable teamData={teamData} teamColor={teamColor} />
-      </div>
     </>
   );
 }

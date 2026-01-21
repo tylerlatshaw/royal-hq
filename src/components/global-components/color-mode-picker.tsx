@@ -11,27 +11,29 @@ export default function ColorModePicker() {
 
     useEffect(() => setMounted(true), []);
 
-    if (!mounted) return null;
+    if (!mounted) {
+        return (
+            <div className="h-9 w-9 rounded-md border bg-neutral-200 dark:bg-neutral-800" />
+        );
+    }
 
     const currentTheme = theme === "system" ? systemTheme : theme;
 
     return (<>
-        <div className="absolute z-50 right-4 bottom-4">
-            <Button
-                asChild
-                variant={"default"}
-                size={"icon-lg"}
-                onClick={() =>
-                    setTheme(currentTheme === "dark" ? "light" : "dark")
-                }
-                className="rounded-full px-3 py-2"
-            >
-                {
-                    currentTheme === "dark"
-                        ? <Sun />
-                        : <Moon />
-                }
-            </Button>
-        </div>
+        <Button
+            asChild
+            variant={"outline"}
+            size={"icon"}
+            onClick={() =>
+                setTheme(currentTheme === "dark" ? "light" : "dark")
+            }
+            className="p-2 cursor-pointer"
+        >
+            {
+                currentTheme === "dark"
+                    ? <Sun />
+                    : <Moon />
+            }
+        </Button>
     </>);
 }

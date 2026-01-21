@@ -8,9 +8,7 @@ type Props = { rows: TransactionRow[] };
 
 export default function TransactionTableClient({ rows }: Props) {
 
-    return <div className="mt-8 overflow-hidden rounded-lg">
-        <div className="overflow-x-auto">
-            <DataTable columns={makeTransactionColumns()} data={rows} />;
-        </div>
+    return <div>
+        <DataTable columns={makeTransactionColumns()} data={rows} />
     </div>;
 }

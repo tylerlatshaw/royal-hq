@@ -1,6 +1,10 @@
 import { getTeams } from "@/app/lib/league/get-teams";
 import DefaultThemeSetter from "./../../../components/global-components/default-theme-setter";
 import TeamList from "./../../../components/teams/team-list";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { AlertCircleIcon } from "lucide-react";
 
 export default async function Page() {
 
@@ -10,15 +14,38 @@ export default async function Page() {
     <>
       <DefaultThemeSetter />
 
-      <div className="mx-auto w-full">
-        <div className="flex items-center justify-center w-full">
-          <span className="text-semibold font-semibold border border-red-300 bg-red-900/60 text-red-300 px-4 py-2 rounded">
-            You are missing a team selection. Please select a team from the list below.
-          </span>
-        </div>
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Roster</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
 
-        <TeamList leagueData={leagueData} />
+      <div className="flex w-full items-center justify-center">
+        <div className="text-left">
+          <Alert variant="destructive">
+            <AlertCircleIcon />
+            <AlertTitle>Missing Team Name</AlertTitle>
+            <AlertDescription>
+              <p>You are missing a team selection. Please select a team from the list below.</p>
+            </AlertDescription>
+          </Alert>
+        </div>
       </div>
+
+      <Card className="mt-4">
+        <CardHeader>
+          <h1 className="text-left text-3xl font-bold">ECHL Teams</h1>
+        </CardHeader>
+        <CardContent>
+          <TeamList leagueData={leagueData} />
+        </CardContent>
+      </Card>
     </>
   );
 }

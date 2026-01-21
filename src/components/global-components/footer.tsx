@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 
 export default function Footer() {
     return <>
-        <footer className="w-full p-6 mx-auto max-w-3xl text-center text-xs text-slate-300/80">
+        <footer className="w-full p-6 mx-auto max-w-3xl text-center text-xs text-slate-600 dark:text-slate-300/80">
             &copy; {dayjs().year()} Tyler J. Latshaw. All rights reserved.
             All trademarks, logos, and brandnames are the property of their
             respective owners. The ECHL wordmark, the ECHL logo, team names,

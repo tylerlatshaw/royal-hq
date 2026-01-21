@@ -4,9 +4,9 @@ const options: swaggerJSDoc.Options = {
     definition: {
         openapi: "3.0.0",
         info: {
-            title: "ECHL Alerts API",
+            title: "Royals HQ API",
             version: "1.0.0",
-            description: "API for ECHL Alerts",
+            description: "API for Royals HQ",
         },
         tags: [{
             name: "League",

@@ -20,7 +20,7 @@ export default withSentryConfig(nextConfig, {
 
   org: "tyler-latshaw",
 
-  project: "echl-alerts",
+  project: "royal-hq",
 
   // Only print logs for uploading source maps in CI
   silent: !process.env.CI,
