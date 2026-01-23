@@ -8,7 +8,7 @@ import { RegisterServiceWorker } from "@/components/global-components/register-s
 import { AppThemeProvider } from "../providers/theme-provider";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://echl.tylerlatshaw.com"),
+  metadataBase: new URL("https://royals-hq.tylerlatshaw.com"),
   title: {
     default: "Royals HQ",
     template: "%s | Royals HQ",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     title: "Royals HQ",
     description:
       "Real-time ECHL transactions, rosters, and team updates. Never miss a move.",
-    url: "https://echl.tylerlatshaw.com",
+    url: "https://royals-hq.tylerlatshaw.com",
     images: [
       {
         url: "/og-default.png",
@@ -59,26 +59,23 @@ export default function RootLayout({
       <AppThemeProvider>
         <div className="h-screen w-screen overflow-hidden">
 
-          <TeamThemeProvider defaultColor="#8349ff">
+          <RegisterServiceWorker />
 
-            <RegisterServiceWorker />
+          {/* <AppBackground /> */}
 
-            {/* <AppBackground /> */}
+          <Header />
 
-            <Header />
+          {/* Scroll Region: MAIN + FOOTER */}
+          <div className="flex h-[calc(100vh-6rem)] flex-col overflow-y-auto">
+            <main className="flex-1">
+              <div className="mx-auto w-full lg:max-w-7xl px-3 lg:px-0 py-6 lg:py-8 text-center">
 
-            {/* Scroll Region: MAIN + FOOTER */}
-            <div className="flex h-[calc(100vh-6rem)] flex-col overflow-y-auto">
-              <main className="flex-1">
-                <div className="mx-auto w-full lg:max-w-7xl px-4 lg:px-0 py-8 text-center">
+                {children}
 
-                  {children}
-
-                </div>
-              </main>
-              <Footer />
-            </div>
-          </TeamThemeProvider>
+              </div>
+            </main>
+            <Footer />
+          </div>
         </div>
       </AppThemeProvider>
     </>

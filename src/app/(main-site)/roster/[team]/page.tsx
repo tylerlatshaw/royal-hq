@@ -3,7 +3,7 @@ import TeamColorSetter from "@/components/roster/team-color-setter";
 import ViewMoreButton from "@/components/roster/view-more-button";
 import { resolveTeamColor } from "@/app/lib/team-map";
 import type { Team } from "@/app/lib/types";
-import { getTeamData } from "@/app/lib/league/get-team-data";
+import { getTeamData } from "@/app/lib/get-team-data";
 import type { Metadata } from "next";
 import DefaultThemeSetter from "@/components/global-components/default-theme-setter";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
@@ -93,8 +93,8 @@ export default async function Page({ params }: Props) {
 
       <Card className="mt-4">
         <CardHeader>
-          <div className="flex items-center justify-between">
-            <h1 className="text-3xl font-bold">{teamData.name + " Roster"}</h1>
+          <div className="flex flex-col md:flex-row gap-4 md:gap-0 items-center justify-between">
+            <h1 className="text-2xl md:text-3xl font-bold">{teamData.name + " Roster"}</h1>
             <ViewMoreButton />
           </div>
         </CardHeader>

@@ -29,7 +29,7 @@ export default async function Page() {
 
             <Card className="mt-4">
                 <CardHeader>
-                    <h1 className="text-left text-3xl font-bold">Subscribe Now</h1>
+                    <h1 className="text-left text-2xl md:text-3xl font-bold">Subscribe Now</h1>
                 </CardHeader>
                 <CardContent>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

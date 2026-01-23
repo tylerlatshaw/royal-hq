@@ -1,4 +1,4 @@
-import { getTeams } from "./../../lib/league/get-teams";
+import { getTeams } from "../../lib/get-teams";
 import DefaultThemeSetter from "./../../../components/global-components/default-theme-setter";
 import TeamList from "./../../../components/teams/team-list";
 import { Metadata } from "next";
@@ -33,7 +33,7 @@ export default async function Page() {
 
       <Card className="mt-4">
         <CardHeader>
-          <h1 className="text-left text-3xl font-bold">ECHL Teams</h1>
+          <h1 className="text-left text-2xl md:text-3xl font-bold">ECHL Teams</h1>
         </CardHeader>
         <CardContent>
           <TeamList leagueData={leagueData} />

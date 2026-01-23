@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import type { Team, Roster } from "@/app/lib/types";
-import { getRoster } from "@/app/lib/league/get-roster";
+import { getRoster } from "@/app/lib/get-roster";
 import RosterTableClient from "./roster-table-client";
 
 type RosterEdge = Roster["data"]["tableData"]["edges"][number];

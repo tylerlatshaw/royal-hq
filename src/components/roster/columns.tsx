@@ -52,7 +52,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="ml-3 text-center cursor-pointer"
+                    className="cursor-pointer"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     #
@@ -78,7 +78,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="-ml-2 cursor-pointer"
+                    className="cursor-pointer"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Player
@@ -132,7 +132,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="-ml-2 cursor-pointer"
+                    className="cursor-pointer"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     <span className="hidden md:inline">Position</span>
@@ -157,7 +157,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="-ml-2 cursor-pointer"
+                    className="cursor-pointer"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     <span className="hidden md:inline">Height</span>
@@ -172,7 +172,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="-ml-2 cursor-pointer"
+                    className="cursor-pointer"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     <span className="hidden md:inline">Weight</span>
@@ -190,7 +190,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="-ml-2 cursor-pointer"
+                    className="cursor-pointer"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     <span className="hidden md:inline">Date of Birth</span>
@@ -215,7 +215,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="-ml-2 cursor-pointer"
+                    className="cursor-pointer"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     <span className="hidden md:inline">Birthplace</span>

@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { getTransactions } from "../lib/league/get-transactions";
+import { getTransactions } from "../lib/get-transactions";
 import { TransactionRow } from "../lib/types";
 import DefaultThemeSetter from "./../../components/global-components/default-theme-setter";
 import TransactionTable from "./../../components/recent-transactions/transaction-table";
