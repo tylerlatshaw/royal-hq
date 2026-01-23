@@ -9,9 +9,6 @@ const nextConfig: NextConfig = {
       new URL("https://assets.leaguestat.com/**")
     ],
   },
-  eslint: {
-    ignoreDuringBuilds: false, // keep linting ON
-  },
 };
 
 export default withSentryConfig(nextConfig, {
