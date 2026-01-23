@@ -62,7 +62,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
                 const { jerseyNumber } = row.original;
                 return (
                     jerseyNumber != null && (
-                        <div className="flex items-center justify-center h-12 w-12 bg-white/5 rounded-full">
+                        <div className="flex items-center justify-center h-12 w-12 bg-black/5 dark:bg-white/5 rounded-full">
                             <span
                                 className={"text-xl font-semibold"}
                                 style={{ "color": teamColor }}
@@ -90,7 +90,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
 
                 return (
                     <div className="flex flex-row items-center gap-4">
-                        <div className="relative size-12 shrink-0 overflow-hidden rounded-full drop-shadow-md drop-shadow-gay-500/50">
+                        <div className="relative size-12 shrink-0 overflow-hidden rounded-full drop-shadow-md drop-shadow-black/25 dark:drop-shadow-white/10">
                             <Image
                                 src={src}
                                 alt={player.name}

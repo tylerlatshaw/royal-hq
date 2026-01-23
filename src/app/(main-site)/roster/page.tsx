@@ -28,10 +28,10 @@ export default async function Page() {
 
       <div className="flex w-full items-center justify-center">
         <div className="text-left">
-          <Alert variant="destructive">
+          <Alert className="border-red-600 bg-red-100 text-red-600 dark:border-red-800 dark:bg-red-950/75 dark:text-red-300">
             <AlertCircleIcon />
-            <AlertTitle>Missing Team Name</AlertTitle>
-            <AlertDescription>
+            <AlertTitle className="text-red-600 dark:text-red-300">Missing Team Name</AlertTitle>
+            <AlertDescription className="text-red-600 dark:text-red-300">
               <p>You are missing a team selection. Please select a team from the list below.</p>
             </AlertDescription>
           </Alert>

@@ -60,20 +60,20 @@ export default function Navbar() {
 
                         </Button>
                     ))}
-                    
-                    <ColorModePicker />
+
+                    <ColorModePicker mode={"desktop"} />
                 </nav>
 
                 {/* Mobile button */}
                 <button
-                    className="md:hidden rounded-md p-2 text-neutral-900 hover:bg-neutral-100 dark:text-neutral-50 dark:hover:bg-neutral-900"
+                    className="md:hidden rounded-md p-2 text-neutral-900 hover:bg-neutral-100 dark:text-neutral-50 dark:hover:bg-neutral-900 cursor-pointer"
                     aria-label="Toggle menu"
                     aria-expanded={open}
                     onClick={() => setOpen((v) => !v)}
                 >
                     <span className="relative block h-5 w-6">
                         <span
-                            className={`absolute top-1 left-0 h-0.5 w-6 bg-current transition ${open ? "translate-y-2 rotate-45" : ""
+                            className={`absolute top-1 left-0 h-0.5 w-6 bg-current transition ${open ? "translate-y-1.5 rotate-45" : ""
                                 }`}
                         />
                         <span
@@ -81,7 +81,7 @@ export default function Navbar() {
                                 }`}
                         />
                         <span
-                            className={`absolute top-4 left-0 h-0.5 w-6 bg-current transition ${open ? "-translate-y-2 -rotate-45" : ""
+                            className={`absolute top-4 left-0 h-0.5 w-6 bg-current transition ${open ? "-translate-y-1.5 -rotate-45" : ""
                                 }`}
                         />
                     </span>
@@ -108,6 +108,8 @@ export default function Navbar() {
                                     {l.label}
                                 </Link>
                             ))}
+
+                            <ColorModePicker mode={"mobile"} />
                         </div>
                     </nav>
                 </div>

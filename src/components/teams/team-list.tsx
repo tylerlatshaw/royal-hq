@@ -12,8 +12,8 @@ const DIVISIONS: Division[] = ["North", "South", "Central", "Mountain"];
 
 export default function TeamList({ leagueData }: { leagueData: LeagueData }) {
     const [q, setQ] = useState("");
-    const [selectedConf, setSelectedConf] = useState<Conference[]>([]);
-    const [selectedDiv, setSelectedDiv] = useState<Division[]>([]);
+    const [selectedConf, setSelectedConf] = useState<Conference[]>(["Eastern"]);
+    const [selectedDiv, setSelectedDiv] = useState<Division[]>(["North"]);
 
     if (!leagueData?.data?.teams) {
         return (
@@ -143,7 +143,7 @@ export default function TeamList({ leagueData }: { leagueData: LeagueData }) {
                 ))}
             </div>
 
-            {filteredTeams.length === 0 && (<div className="mt-6 rounded-md border p-4 text-sm opacity-80"> No teams match those filters. </div>)}
+            {filteredTeams.length === 0 && (<div className="mt-6 rounded-md border p-4 opacity-80"> No teams match those filters. </div>)}
         </>
     );
 }
