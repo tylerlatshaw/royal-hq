@@ -42,7 +42,7 @@ export function DataTable<TData, TValue>({
     });
 
     return (
-        <div className="rounded-md border border-white/10">
+        <div className="rounded-md border border-black/10 dark:border-white/10">
             <Table>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
@@ -56,11 +56,11 @@ export function DataTable<TData, TValue>({
                                         key={header.id}
                                         onClick={canSort ? header.column.getToggleSortingHandler() : undefined}
                                         className={[
-                                            canSort ? "cursor-pointer select-none" : "",
+                                            canSort ? "mx-auto cursor-pointer select-none" : "",
                                             meta?.className ?? "",
                                         ].join(" ").trim()}
                                     >
-                                        <div className="flex items-center gap-1">
+                                        <div className="flex items-center justify-center gap-1 font-semibold">
                                             {flexRender(header.column.columnDef.header, header.getContext())}
                                         </div>
                                     </TableHead>

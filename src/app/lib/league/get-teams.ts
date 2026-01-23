@@ -1,5 +1,6 @@
 import "server-only";
 import type { LeagueData, LeagueResponse } from "@/app/lib/types";
+import { TEAM_META_BY_SLUG } from "../team-map";
 
 const ENDPOINT = "https://gql.eliteprospects.com/";
 const REVALIDATE_SECONDS = 86400; // 24 hours
@@ -63,7 +64,19 @@ export async function getTeams(): Promise<LeagueData> {
             throw new Error("ECHL league not found in EliteProspects response");
         }
 
-        const teamsSorted = [...(echl.teams ?? [])].sort((a, b) => a.name.localeCompare(b.name));
+        const teamsNormalized = (echl.teams ?? []).map((team) => {
+            const meta = TEAM_META_BY_SLUG[team.slug];
+
+            return {
+                ...team,
+                conferenceDivision: {
+                    conference: meta?.conference ?? "UNKNOWN",
+                    division: meta?.division ?? "UNKNOWN",
+                }
+            };
+        });
+
+        const teamsSorted = [...teamsNormalized].sort((a, b) => a.name.localeCompare(b.name));
 
         return {
             data: {

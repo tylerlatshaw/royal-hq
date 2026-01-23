@@ -5,20 +5,21 @@ import "./globals.css";
 import { TeamThemeProvider } from "./.././providers/team-theme-provider";
 import { Metadata } from "next";
 import { RegisterServiceWorker } from "@/components/global-components/register-service-worker";
+import { AppThemeProvider } from "../providers/theme-provider";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://echl.tylerlatshaw.com"),
   title: {
-    default: "ECHL Alerts",
-    template: "%s | ECHL Alerts",
+    default: "Royals HQ",
+    template: "%s | Royals HQ",
   },
   description:
     "Real-time ECHL transactions, rosters, and team updates. Never miss a move.",
-  applicationName: "ECHL Alerts",
+  applicationName: "Royals HQ",
   openGraph: {
     type: "website",
-    siteName: "ECHL Alerts",
-    title: "ECHL Alerts",
+    siteName: "Royals HQ",
+    title: "Royals HQ",
     description:
       "Real-time ECHL transactions, rosters, and team updates. Never miss a move.",
     url: "https://echl.tylerlatshaw.com",
@@ -27,13 +28,13 @@ export const metadata: Metadata = {
         url: "/og-default.png",
         width: 1200,
         height: 630,
-        alt: "ECHL Alerts",
+        alt: "Royals HQ",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ECHL Alerts",
+    title: "Royals HQ",
     description:
       "Real-time ECHL transactions, rosters, and team updates.",
     images: ["/og-default.png"],
@@ -54,30 +55,32 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="h-screen w-screen overflow-hidden bg-black text-white">
+    <>
+      <AppThemeProvider>
+        <div className="h-screen w-screen overflow-hidden">
 
-        <TeamThemeProvider defaultColor="#8349ff">
+          <TeamThemeProvider defaultColor="#8349ff">
 
-          <RegisterServiceWorker />
+            <RegisterServiceWorker />
 
-          <AppBackground />
+            {/* <AppBackground /> */}
 
-          <Header />
+            <Header />
 
-          {/* Scroll Region: MAIN + FOOTER */}
-          <div className="flex h-[calc(100vh-6rem)] flex-col overflow-y-auto">
-            <main className="flex-1">
-              <div className="mx-auto w-full lg:max-w-7xl px-4 lg:px-0 py-8 text-center">
+            {/* Scroll Region: MAIN + FOOTER */}
+            <div className="flex h-[calc(100vh-6rem)] flex-col overflow-y-auto">
+              <main className="flex-1">
+                <div className="mx-auto w-full lg:max-w-7xl px-4 lg:px-0 py-8 text-center">
 
-                {children}
+                  {children}
 
-              </div>
-            </main>
-            <Footer />
-          </div>
-        </TeamThemeProvider>
-      </body>
-    </html>
+                </div>
+              </main>
+              <Footer />
+            </div>
+          </TeamThemeProvider>
+        </div>
+      </AppThemeProvider>
+    </>
   );
 }

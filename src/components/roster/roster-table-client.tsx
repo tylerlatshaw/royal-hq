@@ -15,7 +15,7 @@ export default function RosterTableClient({ players, teamColor }: Props) {
     }
 
     return (
-        <div className="mt-8 overflow-hidden rounded-lg">
+        <div className="overflow-hidden rounded-lg">
             <div className="overflow-x-auto">
                 <DataTable<RosterRow, unknown> columns={makeColumns(teamColor)} data={players} />
             </div>

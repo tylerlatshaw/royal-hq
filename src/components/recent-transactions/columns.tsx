@@ -5,10 +5,11 @@ import { Button } from "../ui/button";
 
 export function formatDate(iso: string) {
     const d = new Date(iso);
-    const m = d.getUTCMonth() + 1;
-    const day = d.getUTCDate();
+    const day = d.toLocaleDateString("en-US", { weekday: "short" });
+    const m = d.getMonth() + 1;
+    const date = d.getUTCDate();
     const y = d.getUTCFullYear();
-    return `${m}/${day}/${y}`;
+    return `${m}/${date}/${y}, (${day})`;
 }
 
 export function makeTransactionColumns(): ColumnDef<TransactionRow>[] {
@@ -18,7 +19,7 @@ export function makeTransactionColumns(): ColumnDef<TransactionRow>[] {
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="-ml-2 cursor-pointer"
+                    className="cursor-pointer"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     <span>Date</span>
@@ -35,7 +36,7 @@ export function makeTransactionColumns(): ColumnDef<TransactionRow>[] {
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="-ml-2 cursor-pointer"
+                    className="cursor-pointer"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     <span>Player</span>
@@ -49,7 +50,7 @@ export function makeTransactionColumns(): ColumnDef<TransactionRow>[] {
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="-ml-2 cursor-pointer"
+                    className="cursor-pointer"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     <span>Details</span>
@@ -63,7 +64,7 @@ export function makeTransactionColumns(): ColumnDef<TransactionRow>[] {
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="ml-2 cursor-pointer"
+                    className="cursor-pointer"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     <span className="hidden md:inline">Team</span>
@@ -71,7 +72,7 @@ export function makeTransactionColumns(): ColumnDef<TransactionRow>[] {
             ),
             enableSorting: true,
             cell: ({ row }) => (
-                <div className="flex items-center">
+                <div className="flex items-center justify-center">
                     <Image
                         src="/reading-royals-logo.svg"
                         alt="Reading Royals Logo"

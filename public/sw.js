@@ -6,7 +6,7 @@ self.addEventListener("push", (event) => {
     data = { title: "Notification", body: "You have an update." };
   }
 
-  const title = data.title || "ECHL Alerts";
+  const title = data.title || "Royals HQ";
   const options = {
     body: data.body || "New Update",
     icon: "/icon-192x192.png",

@@ -9,9 +9,6 @@ const nextConfig: NextConfig = {
       new URL("https://assets.leaguestat.com/**")
     ],
   },
-  eslint: {
-    ignoreDuringBuilds: false, // keep linting ON
-  },
 };
 
 export default withSentryConfig(nextConfig, {
@@ -20,7 +17,7 @@ export default withSentryConfig(nextConfig, {
 
   org: "tyler-latshaw",
 
-  project: "echl-alerts",
+  project: "royal-hq",
 
   // Only print logs for uploading source maps in CI
   silent: !process.env.CI,

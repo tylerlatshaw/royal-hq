@@ -23,7 +23,6 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
         }
 
-        // Basic email sanity check (not perfect, but fine)
         if (!email.includes("@") || email.length < 5) {
             return NextResponse.json({ error: "Invalid email" }, { status: 400 });
         }
@@ -52,14 +51,14 @@ export async function POST(req: NextRequest) {
             await redis.rpush("push:subs", record);
             return NextResponse.json({
                 data: {
-                    added: false
+                    added: true
                 }
             }, { status: 200 });
         }
 
         return NextResponse.json({
             data: {
-                added: true
+                added: false
             }
         }, { status: 200 });
     } catch (e) {

@@ -73,6 +73,7 @@ export type Team = {
     } | null,
     slug: string,
     eliteprospectsUrlPath: string,
+    conferenceDivision: TeamConferenceDivision,
 }
 
 export type Roster = {
@@ -176,4 +177,12 @@ export type SubscribeBody = {
     lastName: string;
     email: string;
     isActive: boolean;
+};
+
+export type Conference = "Eastern" | "Western" | "Unknown" | "All";
+export type Division = "North" | "South" | "Central" | "Mountain" | "Unknown" | "All";
+
+export type TeamConferenceDivision = {
+    conference: Conference;
+    division: Division;
 };
