@@ -59,26 +59,23 @@ export default function RootLayout({
       <AppThemeProvider>
         <div className="h-screen w-screen overflow-hidden">
 
-          <TeamThemeProvider defaultColor="#8349ff">
+          <RegisterServiceWorker />
 
-            <RegisterServiceWorker />
+          {/* <AppBackground /> */}
 
-            {/* <AppBackground /> */}
+          <Header />
 
-            <Header />
+          {/* Scroll Region: MAIN + FOOTER */}
+          <div className="flex h-[calc(100vh-6rem)] flex-col overflow-y-auto">
+            <main className="flex-1">
+              <div className="mx-auto w-full lg:max-w-7xl px-3 lg:px-0 py-6 lg:py-8 text-center">
 
-            {/* Scroll Region: MAIN + FOOTER */}
-            <div className="flex h-[calc(100vh-6rem)] flex-col overflow-y-auto">
-              <main className="flex-1">
-                <div className="mx-auto w-full lg:max-w-7xl px-4 lg:px-0 py-8 text-center">
+                {children}
 
-                  {children}
-
-                </div>
-              </main>
-              <Footer />
-            </div>
-          </TeamThemeProvider>
+              </div>
+            </main>
+            <Footer />
+          </div>
         </div>
       </AppThemeProvider>
     </>

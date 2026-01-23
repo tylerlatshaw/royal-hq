@@ -29,9 +29,16 @@ export async function getTransactions(limit: number): Promise<Transaction[]> {
 
     try {
         const raw = await redis.lrange("tx:transactions", 0, finalLimit - 1);
-        return (raw ?? [])
+
+        const sorted = (raw ?? [])
             .map(safeParseTransaction)
-            .filter((x): x is Transaction => x !== null);
+            .filter((x): x is Transaction => x !== null)
+            .sort((a, b) => (
+                new Date(b.date).getTime() - new Date(a.date).getTime() ||
+                new Date(b.seenAt).getTime() - new Date(a.seenAt).getTime()
+            ));
+
+        return sorted;
     } catch (e) {
         console.error("Error getting transactions", e);
         return [];

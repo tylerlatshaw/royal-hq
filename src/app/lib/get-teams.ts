@@ -1,6 +1,6 @@
 import "server-only";
 import type { LeagueData, LeagueResponse } from "@/app/lib/types";
-import { TEAM_META_BY_SLUG } from "../team-map";
+import { TEAM_META_BY_SLUG } from "./team-map";
 
 const ENDPOINT = "https://gql.eliteprospects.com/";
 const REVALIDATE_SECONDS = 86400; // 24 hours
