@@ -30,7 +30,7 @@ const options: swaggerJSDoc.Options = {
             {
                 url: process.env.NODE_ENV === "development"
                     ? "http://localhost:3000"
-                    : "https://echl.tylerlatshaw.com",
+                    : "https://royals-hq.tylerlatshaw.com",
             },
         ],
     },

@@ -8,7 +8,7 @@ import { RegisterServiceWorker } from "@/components/global-components/register-s
 import { AppThemeProvider } from "../providers/theme-provider";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://echl.tylerlatshaw.com"),
+  metadataBase: new URL("https://royals-hq.tylerlatshaw.com"),
   title: {
     default: "Royals HQ",
     template: "%s | Royals HQ",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     title: "Royals HQ",
     description:
       "Real-time ECHL transactions, rosters, and team updates. Never miss a move.",
-    url: "https://echl.tylerlatshaw.com",
+    url: "https://royals-hq.tylerlatshaw.com",
     images: [
       {
         url: "/og-default.png",
