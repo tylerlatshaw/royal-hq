@@ -7,7 +7,6 @@ import { Metadata } from "next";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
-  title: "Recent Transactions",
   description:
     "Latest ECHL transactions including signings, trades, and call-ups.",
 };

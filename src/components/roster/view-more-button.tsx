@@ -15,6 +15,7 @@ export default function ViewMoreButton() {
     return (
         <Button
             asChild
+            variant={"default"}
             className="py-4"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -22,8 +23,8 @@ export default function ViewMoreButton() {
             <Link
                 href="/teams"
                 style={{
-                    backgroundColor: isHovered ? teamColor : "#ffffff33",
-                    color: isHovered ? hoverTextColor : "white",
+                    backgroundColor: isHovered ? "var(--primary)" : teamColor,
+                    color: isHovered ? "var(--primary-foreground)" : hoverTextColor,
                 }}
 
             >

@@ -18,6 +18,9 @@ import {
     TableHeader,
     TableRow,
 } from "./../../components/ui/table";
+import { cn } from "@/app/lib/utils";
+
+type ColumnMeta = { className?: string };
 
 type DataTableProps<TData, TValue> = {
     columns: ColumnDef<TData, TValue>[];
@@ -37,18 +40,29 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     });
 
     return (
-        <div className="rounded-md border border-black/10 dark:border-white/10">
-            <Table>
+        <div className="text-left md:text-center rounded-md border border-black/10 dark:border-white/10 overflow-x-auto overflow-y-visible">
+            <Table className="min-w-[750px] w-full">
                 <TableHeader>
                     {table.getHeaderGroups().map((hg) => (
                         <TableRow key={hg.id}>
-                            {hg.headers.map((header) => (
-                                <TableHead key={header.id}>
-                                    <div className="flex items-center justify-center gap-1 font-semibold">
+                            {hg.headers.map((header) => {
+                                const canSort = header.column.getCanSort();
+                                const meta = header.column.columnDef.meta as ColumnMeta | undefined;
+
+                                return <TableHead
+                                    key={header.id}
+                                    onClick={canSort ? header.column.getToggleSortingHandler() : undefined}
+                                    className={[
+                                        canSort ? "mx-auto cursor-pointer select-none" : "",
+                                        meta?.className ?? "",
+                                        "bg-muted z-30"
+                                    ].join(" ").trim()}
+                                >
+                                    <div className="flex items-center justify-start md:justify-center gap-1 font-semibold">
                                         {flexRender(header.column.columnDef.header, header.getContext())}
                                     </div>
-                                </TableHead>
-                            ))}
+                                </TableHead>;
+                            })}
                         </TableRow>
                     ))}
                 </TableHeader>
@@ -56,12 +70,20 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
                 <TableBody>
                     {table.getRowModel().rows.length ? (
                         table.getRowModel().rows.map((row) => (
-                            <TableRow key={row.id}>
-                                {row.getVisibleCells().map((cell) => (
-                                    <TableCell key={cell.id}>
+                            <TableRow key={row.id} className="group hover:bg-muted/50 border border-b">
+                                {row.getVisibleCells().map((cell) => {
+                                    const meta = cell.column.columnDef.meta as ColumnMeta | undefined;
+
+                                    return <TableCell
+                                        key={cell.id}
+                                        className={cn(
+                                            "group-hover:bg-muted/50",
+                                            meta?.className ?? ""
+                                        )}
+                                    >
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                    </TableCell>
-                                ))}
+                                    </TableCell>;
+                                })}
                             </TableRow>
                         ))
                     ) : (

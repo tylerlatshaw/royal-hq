@@ -52,7 +52,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="cursor-pointer"
+                    className="cursor-pointer px-0"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     #
@@ -78,7 +78,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="cursor-pointer"
+                    className="cursor-pointer px-0"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Player
@@ -89,7 +89,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
                 const src = resolvePlayerImage(player.name, player.imageUrl);
 
                 return (
-                    <div className="flex flex-row items-center gap-4">
+                    <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 px-2 md:px-0">
                         <div className="relative size-12 shrink-0 overflow-hidden rounded-full drop-shadow-md drop-shadow-black/25 dark:drop-shadow-white/10">
                             <Image
                                 src={src}
@@ -100,9 +100,10 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
                             />
                         </div>
 
-                        <span className="font-bold">{player.name}</span>
-                        <div className="relative size-8 overflow-hidden">
-                            {player.nhlRights &&
+                        <span className="font-bold text-wrap text-center">{player.name}</span>
+
+                        {player.nhlRights &&
+                            <div className="relative size-8 overflow-hidden">
                                 <Tooltip>
                                     <TooltipTrigger>
                                         <Image
@@ -120,10 +121,16 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
                                         <span>NHL Rights: {player.nhlRights.team.name} ({player.nhlRights.rights})</span>
                                     </TooltipContent>
                                 </Tooltip>
-                            }
-                        </div>
+                            </div>
+                        }
                     </div>
                 );
+            },
+            meta: {
+                className:
+                    "sticky left-0 z-20 bg-card group-hover:bg-muted " +
+                    "after:content-[''] after:absolute after:top-0 after:right-0 after:h-full after:w-3 " +
+                    "after:bg-gradient-to-r after:from-transparent after:to-black/10 md:after:bg-none",
             },
         },
         {
@@ -132,7 +139,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="cursor-pointer"
+                    className="cursor-pointer px-0"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     <span className="hidden md:inline">Position</span>
@@ -157,7 +164,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="cursor-pointer"
+                    className="cursor-pointer px-0"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     <span className="hidden md:inline">Height</span>
@@ -172,7 +179,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="cursor-pointer"
+                    className="cursor-pointer px-0"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     <span className="hidden md:inline">Weight</span>
@@ -190,7 +197,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="cursor-pointer"
+                    className="cursor-pointer px-0"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     <span className="hidden md:inline">Date of Birth</span>
@@ -198,9 +205,14 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
                 </Button>
             ),
             cell: ({ row }) => {
-                return <span>
-                    {formatDob(row.original.player.dateOfBirth)} - ({row.original.player.age ?? ""})
-                </span>;
+                return <div className="flex flex-col md:flex-row items-center justify-center gap-1">
+                    <span>{formatDob(row.original.player.dateOfBirth)}</span>
+                    <span className="hidden md:inline">-</span>
+                    <div className="flex gap-1">
+                        <span className="inline md:hidden">Age:</span>
+                        <span>{row.original.player.age ?? ""}</span>
+                    </div>
+                </div>;
             }
         },
         {
@@ -215,11 +227,10 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="cursor-pointer"
+                    className="cursor-pointer px-0"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    <span className="hidden md:inline">Birthplace</span>
-                    <span className="inline md:hidden">BP</span>
+                    <span>Birthplace</span>
                 </Button>
             ),
             cell: ({ row }) => {
