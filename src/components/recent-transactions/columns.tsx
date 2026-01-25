@@ -9,7 +9,12 @@ export function formatDate(iso: string) {
     const m = d.getMonth() + 1;
     const date = d.getUTCDate();
     const y = d.getUTCFullYear();
-    return `${m}/${date}/${y}, (${day})`;
+    return <>
+        <div>
+            {`${m}/${date}/${y}`}
+            <span className="hidden md:inline">{`, (${day})`}</span>
+        </div>
+    </>;
 }
 
 export function makeTransactionColumns(): ColumnDef<TransactionRow>[] {
@@ -19,7 +24,7 @@ export function makeTransactionColumns(): ColumnDef<TransactionRow>[] {
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="cursor-pointer"
+                    className="cursor-pointer px-0"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     <span>Date</span>
@@ -30,13 +35,19 @@ export function makeTransactionColumns(): ColumnDef<TransactionRow>[] {
             sortingFn: (a, b) =>
                 new Date(a.getValue("date") as string).getTime() -
                 new Date(b.getValue("date") as string).getTime(),
+            meta: {
+                className:
+                    "sticky left-0 z-20 bg-card group-hover:bg-muted " +
+                    "after:content-[''] after:absolute after:top-0 after:right-0 after:h-full after:w-3 " +
+                    "after:bg-gradient-to-r after:from-transparent after:to-black/10 md:after:bg-none",
+            },
         },
         {
             accessorKey: "player",
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="cursor-pointer"
+                    className="cursor-pointer px-0"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     <span>Player</span>
@@ -50,7 +61,7 @@ export function makeTransactionColumns(): ColumnDef<TransactionRow>[] {
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="cursor-pointer"
+                    className="cursor-pointer px-0"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     <span>Details</span>
@@ -64,7 +75,7 @@ export function makeTransactionColumns(): ColumnDef<TransactionRow>[] {
             header: ({ column }) => (
                 <Button
                     variant="link"
-                    className="cursor-pointer"
+                    className="cursor-pointer px-0"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     <span className="hidden md:inline">Team</span>

@@ -2,7 +2,6 @@ import AppBackground from "./../../components/global-components/app-background";
 import Footer from "./../../components/global-components/footer";
 import Header from "./../../components/global-components/header";
 import "./globals.css";
-import { TeamThemeProvider } from "./.././providers/team-theme-provider";
 import { Metadata } from "next";
 import { RegisterServiceWorker } from "@/components/global-components/register-service-worker";
 import { AppThemeProvider } from "../providers/theme-provider";
