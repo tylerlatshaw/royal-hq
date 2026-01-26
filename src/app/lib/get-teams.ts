@@ -26,10 +26,10 @@ export async function getTeams(): Promise<LeagueData> {
                 city
                 country { slug name iso_3166_1_alpha_2 }
                 activeSeason { slug startYear endYear }
-                arena { id name location yearOfConstruction capacity infoAsHTML }
+                arena { id name location yearOfConstruction capacity infoAsHTML imageUrl }
                 secondaryArena { id name location yearOfConstruction capacity infoAsHTML }
                 capHit
-                links { officialWebUrl }
+                links { officialWebUrl facebook x instagram youtube }
                 slug
                 eliteprospectsUrlPath
             }

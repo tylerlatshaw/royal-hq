@@ -1,6 +1,6 @@
 import { getTeams } from "@/app/lib/get-teams";
-import DefaultThemeSetter from "./../../../components/global-components/default-theme-setter";
-import TeamList from "./../../../components/teams/team-list";
+import DefaultThemeSetter from "../../../components/global-components/default-theme-setter";
+import TeamList from "../../../components/teams/team-list";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
@@ -21,7 +21,7 @@ export default async function Page() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Roster</BreadcrumbPage>
+            <BreadcrumbPage>ECHL Teams</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Player } from "../../app/lib/types";
 
 export default function PlayerAvatar({ player }: { player: Player }) {
-    const fallbackSrc = "/images/default-player.png";
+    const fallbackSrc = "/default-player-image.png";
 
     const [src, setSrc] = useState(player.imageUrl ?? fallbackSrc);
 
