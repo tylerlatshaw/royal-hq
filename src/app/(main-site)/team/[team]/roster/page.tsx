@@ -8,6 +8,7 @@ import type { Metadata } from "next";
 import DefaultThemeSetter from "@/components/global-components/default-theme-setter";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import TeamInfoButton from "@/components/roster/team-info-button";
 
 export async function generateMetadata(
   { params }: Props
@@ -86,16 +87,28 @@ export default async function Page({ params }: Props) {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>{teamData.name}</BreadcrumbPage>
+            <BreadcrumbLink href={`/team/${teamData.slug}`} className="inline md:hidden">...</BreadcrumbLink>
+            <BreadcrumbLink href={`/team/${teamData.slug}`} className="hidden md:inline">{teamData.name}</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Roster</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
 
       <Card className="mt-4">
         <CardHeader>
-          <div className="flex flex-col md:flex-row gap-4 md:gap-0 items-center justify-between">
-            <h1 className="text-2xl md:text-3xl font-bold">{teamData.name + " Roster"}</h1>
-            <ViewMoreButton />
+          <div className="grid grid-rows-2 md:grid-rows-1 grid-cols-2 md:grid-cols-4 items-center gap-4 md:gap-0">
+            <div className="w-full md:w-fit justify-self-start row-start-2 md:row-start-1">
+              <ViewMoreButton />
+            </div>
+            <h1 className="text-2xl md:text-3xl col-span-2 font-bold text-center row-start-1">
+              {teamData.name} Roster
+            </h1>
+            <div className="w-full md:w-fit justify-self-end row-start-2 md:row-start-1 col-start-2 md:col-start-4">
+              <TeamInfoButton teamSlug={teamData.slug} />
+            </div>
           </div>
         </CardHeader>
         <CardContent>

@@ -8,7 +8,7 @@ import ColorModePicker from "./color-mode-picker";
 
 const navLinks = [
     { href: "/", label: "Transactions" },
-    { href: "/roster/reading-royals", label: "Roster" },
+    { href: "/team/reading-royals/roster", label: "Roster" },
     { href: "/teams", label: "Teams" },
     { href: "/subscribe", label: "Subscribe" },
 ];

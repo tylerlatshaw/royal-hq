@@ -120,7 +120,7 @@ export default function TeamList({ leagueData }: { leagueData: LeagueData }) {
                         className="flex min-h-54 flex-col items-center justify-center rounded-lg bg-black/4 p-4 text-black hover:bg-black/10 hover:text-black dark:bg-white/5 dark:text-white dark:hover:bg-white/10 dark:hover:text-white"
                         asChild
                     >
-                        <Link href={`/roster/${team.slug}`}>
+                        <Link href={`/team/${team.slug}/roster`}>
                             <div className="relative mx-auto my-2 h-24 w-24">
                                 <Image
                                     src={team.logo?.large || team.logo?.medium || "/default-player-image.png"}

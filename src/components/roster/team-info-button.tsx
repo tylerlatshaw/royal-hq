@@ -2,12 +2,16 @@
 
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { getReadableTextColor } from "../../app/lib/accessible-color";
 import { useTeamTheme } from "../../app/providers/team-theme-provider";
 
-export default function ViewMoreButton() {
+type Props = {
+    teamSlug: string;
+};
+
+export default function TeamInfoButton({ teamSlug }: Props) {
     const { teamColor } = useTeamTheme();
     const [isHovered, setIsHovered] = useState(false);
     const hoverTextColor = getReadableTextColor(teamColor);
@@ -21,14 +25,14 @@ export default function ViewMoreButton() {
             onMouseLeave={() => setIsHovered(false)}
         >
             <Link
-                href="/teams"
+                href={`/team/${teamSlug}/info`}
                 style={{
                     backgroundColor: isHovered ? "var(--primary)" : teamColor,
                     color: isHovered ? "var(--primary-foreground)" : hoverTextColor,
                 }}
 
             >
-                <ArrowLeft className="mr-2" /> View All Teams
+                Team Info <ArrowRight className="ml-2" />
             </Link>
         </Button>
     );

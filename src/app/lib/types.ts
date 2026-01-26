@@ -58,6 +58,7 @@ export type Team = {
         yearOfConstruction: number | null,
         capacity: number | null,
         infoAsHTML: string | null,
+        imageUrl: string | null,
     } | null,
     secondaryArena: {
         id: string,
@@ -69,7 +70,11 @@ export type Team = {
     } | null,
     capHit: string | null,
     links: {
-        officialWebUrl: string | null
+        officialWebUrl: string | null,
+        facebook: string | null,
+        x: string | null,
+        instagram: string | null,
+        youtube: string | null,
     } | null,
     slug: string,
     eliteprospectsUrlPath: string,
