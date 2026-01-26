@@ -50,7 +50,7 @@ export default async function ArenaInfo({ arenaData, teamColor }: Props) {
 
                 <div className="flex gap-1 items-center justify-center">
                     <span className="font-semibold">Capacity:</span>
-                    <span>{capacity || "-"}</span>
+                    <span>{(capacity as number).toLocaleString("en") || "-"}</span>
                 </div>
 
                 {
