@@ -1,11 +1,11 @@
 "use client";
 
 import { DataTable } from "./data-table";
-import { makeColumns, type RosterRow } from "./columns";
-import type { Roster } from "@/app/lib/types";
+import { makeColumns } from "./columns";
+import type { Player } from "@/app/lib/types";
 
 type Props = {
-    players: Roster["data"]["tableData"]["edges"];
+    players: Player[];
     teamColor: string;
 };
 
@@ -17,7 +17,7 @@ export default function RosterTableClient({ players, teamColor }: Props) {
     return (
         <div className="overflow-hidden rounded-lg">
             <div className="overflow-x-auto">
-                <DataTable<RosterRow, unknown> columns={makeColumns(teamColor)} data={players} />
+                <DataTable<Player, unknown> columns={makeColumns(teamColor)} data={players} />
             </div>
         </div>
     );

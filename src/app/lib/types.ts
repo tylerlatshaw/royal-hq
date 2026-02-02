@@ -81,56 +81,32 @@ export type Team = {
     conferenceDivision: TeamConferenceDivision,
 }
 
-export type Roster = {
-    data: {
-        tableData: {
-            edges: {
-                player: Player,
-                jerseyNumber: number | null
-            }[]
-        },
-        footerData: {
-            edges: {
-                playersByPositions: {
-                    position: Position,
-                    players: number
-                }[],
-                averageHeight: {
-                    imperial: string
-                },
-                averageWeight: {
-                    imperial: string
-                },
-                averageAge: string
-            }[]
-        }
-    }
-}
-
-
 export type Player = {
     id: string,
+    jerseyNumber: number | null,
+    active: string,
     firstName: string | null,
     lastName: string | null,
     name: string,
-    status: "active" | "retired" | "deceased",
+    phoneticName: string | null,
     position: Position | null,
     shoots: "L" | "R" | null,
     catches: "L" | "R" | null,
     dateOfBirth: string | null,
     age: number | null,
-    placeOfBirth: string | null,
-    nationality: {
-        name: string,
-        iso_3166_1_alpha_2: string
-    } | null,
-    weight: {
-        imperial: number
-    } | null,
-    height: {
-        imperial: string
-    } | null,
-    gameStatus: "healthy" | "injured" | "suspended",
+    birthplace: {
+        town: string | null,
+        state: string | null,
+        country: string | null
+    },
+    hometown: {
+        town: string | null,
+        state: string | null,
+        country: string | null
+    },
+    nationality: string | null,
+    height: string | null,
+    weight: number | null,
     nhlRights: {
         team: {
             logo: {
@@ -138,12 +114,9 @@ export type Player = {
                 medium: string,
             } | null,
             name: string,
-        },
-        rights: "signed" | "unsigned"
+        }
     } | null,
-    imageUrl: string | null,
-    imageCopyright: string | null,
-    eliteprospectsUrlPath: string | null
+    imageUrl: string | null
 }
 
 export type Position = "G" | "D" | "F";
