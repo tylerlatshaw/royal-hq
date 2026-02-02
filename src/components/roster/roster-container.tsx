@@ -1,9 +1,7 @@
 import dayjs from "dayjs";
-import type { Team, Roster } from "@/app/lib/types";
+import type { Team, Player } from "@/app/lib/types";
 import { getRoster } from "@/app/lib/get-roster";
 import RosterTableClient from "./roster-table-client";
-
-type RosterEdge = Roster["data"]["tableData"]["edges"][number];
 
 type Props = {
     teamData: Team;
@@ -17,25 +15,21 @@ export default async function RosterTable({ teamData, teamColor }: Props) {
         teamData.activeSeason?.slug ??
         `${dayjs().format("YYYY")}-${dayjs().add(1, "year").format("YYYY")}`;
 
-    let edges: RosterEdge[] = [];
+    let players: Player[] = [];
 
     try {
-        const roster = await getRoster(teamData.id, season);
+        const res: Player[] = await getRoster(teamData.id, season) ?? [];
 
-        edges =
-            (roster.data.tableData.edges ?? [])
-                .filter((p: RosterEdge) => p.jerseyNumber != null)
-                .slice()
-                .sort((a: RosterEdge, b: RosterEdge) => {
-                    const aRank = positionRank[a.player.position ?? "Z"] ?? 99;
-                    const bRank = positionRank[b.player.position ?? "Z"] ?? 99;
-                    if (aRank !== bRank) return aRank - bRank;
-                    return (a.jerseyNumber ?? 999) - (b.jerseyNumber ?? 999);
-                }) ?? [];
+        players = res.sort((a, b) => {
+            const aRank = positionRank[a.position ?? "Z"] ?? 99;
+            const bRank = positionRank[b.position ?? "Z"] ?? 99;
+            if (aRank !== bRank) return aRank - bRank;
+            return (a.jerseyNumber ?? 999) - (b.jerseyNumber ?? 999);
+        });
     } catch (e) {
         console.error("Error getting roster:", e);
-        edges = [];
+        throw new Error("Error getting roster");
     }
 
-    return <RosterTableClient players={edges} teamColor={teamColor} />;
+    return <RosterTableClient players={players} teamColor={teamColor} />;
 }

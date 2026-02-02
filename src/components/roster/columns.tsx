@@ -6,11 +6,6 @@ import { resolvePlayerImage } from "../../app/lib/player-image-map";
 import { Player } from "../../app/lib/types";
 import { Button } from "../ui/button";
 
-export type RosterRow = {
-    player: Player;
-    jerseyNumber: number | null;
-};
-
 function formatHeight(imperial?: string | null) {
     if (!imperial) return "—";
 
@@ -32,23 +27,12 @@ function formatDob(dob?: string | null) {
     });
 }
 
-function parseBirthplace(place: string | null) {
-    if (!place) return { country: "", region: "", city: "" };
-
-    const parts = place.split(",").map((p) => p.trim()).filter(Boolean);
-
-    const city = parts[0] ?? "";
-    const country = parts.length >= 2 ? (parts[parts.length - 1] ?? "") : "";
-    const region = parts.length > 2 ? parts.slice(1, -1).join(", ") : (parts[1] ?? "");
-
-    return { city, region, country };
-}
-
-export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] {
+export function makeColumns(teamColor: string): ColumnDef<Player, unknown>[] {
     return [
         {
             id: "jerseyNumber",
             accessorFn: (row) => row.jerseyNumber ?? -1,
+            sortDescFirst: false,
             header: ({ column }) => (
                 <Button
                     variant="link"
@@ -59,14 +43,14 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
                 </Button>
             ),
             cell: ({ row }) => {
-                const { jerseyNumber } = row.original;
+                const player = row.original;
                 return (
-                    jerseyNumber != null && (
+                    player.jerseyNumber != null && (
                         <div className="flex items-center justify-center h-12 w-12 bg-black/5 dark:bg-white/5 rounded-full">
                             <span
                                 className={"text-xl font-semibold"}
                                 style={{ "color": teamColor }}
-                            >{jerseyNumber}</span>
+                            >{player.jerseyNumber}</span>
                         </div>
                     )
                 );
@@ -74,7 +58,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
         },
         {
             id: "player",
-            accessorFn: (row) => removeAccents(row.player.name),
+            accessorFn: (row) => removeAccents(row.name),
             header: ({ column }) => (
                 <Button
                     variant="link"
@@ -85,7 +69,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
                 </Button>
             ),
             cell: ({ row }) => {
-                const { player } = row.original;
+                const player = row.original;
                 const src = resolvePlayerImage(player.name, player.imageUrl);
 
                 return (
@@ -118,7 +102,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
                                         side="top"
                                         sideOffset={12}
                                     >
-                                        <span>NHL Rights: {player.nhlRights.team.name} ({player.nhlRights.rights})</span>
+                                        <span>NHL Rights: {player.nhlRights.team.name}</span>
                                     </TooltipContent>
                                 </Tooltip>
                             </div>
@@ -135,7 +119,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
         },
         {
             id: "position",
-            accessorFn: (row) => row.player.position ?? "Z", // nulls sort last
+            accessorFn: (row) => row.position ?? "Z", // nulls sort last
             header: ({ column }) => (
                 <Button
                     variant="link"
@@ -146,14 +130,14 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
                     <span className="inline md:hidden">POS</span>
                 </Button>
             ),
-            cell: ({ row }) => row.original.player.position ?? "—",
+            cell: ({ row }) => row.original.position ?? "—",
         },
 
         {
             id: "height",
             // Sort by inches if possible (e.g. "6'2\"" -> 74)
             accessorFn: (row) => {
-                const h = row.player.height?.imperial;
+                const h = row.height;
                 if (!h) return -1;
                 const m = h.match(/(\d+)\D+(\d+)/);
                 if (!m) return -1;
@@ -161,6 +145,7 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
                 const inches = Number(m[2]);
                 return feet * 12 + inches;
             },
+            sortDescFirst: false,
             header: ({ column }) => (
                 <Button
                     variant="link"
@@ -171,11 +156,12 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
                     <span className="inline md:hidden">H</span>
                 </Button>
             ),
-            cell: ({ row }) => formatHeight(row.original.player.height?.imperial),
+            cell: ({ row }) => formatHeight(row.original.height),
         },
         {
             id: "weight",
-            accessorFn: (row) => row.player.weight?.imperial ?? -1,
+            accessorFn: (row) => row.weight ?? Number.MAX_SAFE_INTEGER,
+            sortDescFirst: false,
             header: ({ column }) => (
                 <Button
                     variant="link"
@@ -187,13 +173,13 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
                 </Button>
             ),
             cell: ({ row }) => {
-                const wt = row.original.player.weight?.imperial;
-                return wt ? `${wt} lbs.` : "—";
+                const player = row.original;
+                return player.weight ? `${player.weight} lbs.` : "—";
             },
         },
         {
             id: "dob",
-            accessorFn: (row) => row.player.dateOfBirth ?? "9999-12-31",
+            accessorFn: (row) => row.dateOfBirth ?? "9999-12-31",
             header: ({ column }) => (
                 <Button
                     variant="link"
@@ -205,12 +191,13 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
                 </Button>
             ),
             cell: ({ row }) => {
+                const player = row.original;
                 return <div className="flex flex-col md:flex-row items-center justify-center gap-1">
-                    <span>{formatDob(row.original.player.dateOfBirth)}</span>
+                    <span>{formatDob(player.dateOfBirth)}</span>
                     <span className="hidden md:inline">-</span>
                     <div className="flex gap-1">
                         <span className="inline md:hidden">Age:</span>
-                        <span>{row.original.player.age ?? ""}</span>
+                        <span>{player.age ?? ""}</span>
                     </div>
                 </div>;
             }
@@ -218,11 +205,24 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
         {
             id: "birthplace",
             accessorFn: (row) => {
-                const place = removeAccents(row.player.placeOfBirth || "");
-                if (!place) return "-"; // sorts last
+                const country =
+                    row.hometown?.country ||
+                    row.birthplace?.country ||
+                    "";
 
-                const { country, city, region } = parseBirthplace(row.player.placeOfBirth);
-                return `${country}|||${city}|||${region}`;
+                const state =
+                    row.hometown?.state ||
+                    row.birthplace?.state ||
+                    "";
+
+                const town =
+                    row.hometown?.town ||
+                    row.birthplace?.town ||
+                    "";
+
+                return removeAccents(
+                    `${country.toUpperCase()}|${state.toUpperCase()}|${town.toUpperCase()}`
+                );
             },
             header: ({ column }) => (
                 <Button
@@ -234,23 +234,35 @@ export function makeColumns(teamColor: string): ColumnDef<RosterRow, unknown>[] 
                 </Button>
             ),
             cell: ({ row }) => {
-                if (!row.original.player.nationality) return "—";
+                const player = row.original;
+                if (!player.nationality) return "—";
 
-                const { nationality, placeOfBirth } = row.original.player;
+                let location;
+                if (player.hometown.town) {
+                    location = player.hometown.town;
+                    if (player.hometown.state) location += ", " + player.hometown.state;
+                    if (player.hometown.country) location += ", " + player.hometown.country;
+                } else if (player.birthplace.town) {
+                    location = player.birthplace.town;
+                    if (player.birthplace.state) location += ", " + player.birthplace.state;
+                    if (player.birthplace.country) location += ", " + player.birthplace.country;
+                } else {
+                    location = "-";
+                }
 
                 return (
                     <div className="flex flex-row items-center gap-2">
                         <div className="relative size-8 shrink-0 overflow-hidden rounded-full drop-shadow-md drop-shadow-gay-500/50">
                             <Image
-                                src={`https://flagsapi.com/${nationality.iso_3166_1_alpha_2}/flat/64.png`}
-                                alt={nationality.name}
+                                src={`https://flagsapi.com/${player.nationality}/flat/64.png`}
+                                alt={player.nationality}
                                 fill
                                 sizes="64px"
                                 className="object-cover object-center"
                                 style={{ transform: "scale(1.6)" }}
                             />
                         </div>
-                        <span>{placeOfBirth ?? "—"}</span>
+                        <span>{location}</span>
                     </div>
                 );
             }

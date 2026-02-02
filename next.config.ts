@@ -6,7 +6,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       new URL("https://files.eliteprospects.com/**"),
       new URL("https://flagsapi.com/**"),
-      new URL("https://assets.leaguestat.com/**")
+      new URL("https://assets.leaguestat.com/**"),
+      new URL("https://**.hockeytech.com/**")
     ],
   },
 };

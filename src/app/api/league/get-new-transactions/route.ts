@@ -118,7 +118,7 @@ export async function GET(req: NextRequest) {
             Fetch page
         ---------------------------------------- */
         const res = await fetch("https://echl.com/transactions", {
-            headers: { "user-agent": "royal-hq-bot/1.0" },
+            headers: { "user-agent": "royals-hq-bot/1.0" },
         });
 
         if (!res.ok) {
